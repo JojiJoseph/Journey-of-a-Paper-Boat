@@ -44,6 +44,7 @@ size = Vector3( 1000, 1, 250 )
 script = ExtResource( 3 )
 
 [node name="River" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="River"]
 shape = SubResource( 1 )
@@ -53,7 +54,7 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.993021, 0.117936, 0, -0.117936, 0.993021, 0.246748, 4.45179, 6.05663 )
+transform = Transform( 1, 0, 0, 0, 0.993021, 0.117936, 0, -0.117936, 0.993021, 0.246748, 4.45179, 9.30786 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
@@ -241,6 +242,8 @@ margin_bottom = 20.0
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+autoplay = true
+bus = "Music"
 
 [node name="MovingBlocks" type="Node" parent="."]
 

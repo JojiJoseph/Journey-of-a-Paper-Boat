@@ -38,7 +38,7 @@ func _on_EnemyHitbox_body_entered(body):
 
 
 func _on_PowerUpHitbox_body_entered(body):
-	if body.power == EXTRA_POINTS:
+	if body.power == body.EXTRA_POINTS:
 		Global.score += 100
 		body.queue_free()
 	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/PaperBoat.gd" type="Script" id=1]
+[ext_resource path="res://Audio/SUCCESS PICKUP Collect Chime 01.ogg" type="AudioStream" id=2]
 
 [sub_resource type="Shader" id=2]
 code = "shader_type spatial;
@@ -31,4 +32,27 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 4 )
 
+[node name="EnemyHitbox" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="EnemyHitbox"]
+shape = SubResource( 4 )
+
+[node name="PowerUpHitbox" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape" type="CollisionShape" parent="PowerUpHitbox"]
+shape = SubResource( 4 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Coin" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 2 )
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="Sounds"]
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_entered" from="EnemyHitbox" to="." method="_on_EnemyHitbox_body_entered"]
+[connection signal="body_entered" from="PowerUpHitbox" to="." method="_on_PowerUpHitbox_body_entered"]

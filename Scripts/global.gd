@@ -7,6 +7,7 @@ extends Node
 var score = 0
 var distance_travelled = 0
 var river_speed = 5 # m/s
+var game_over = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,4 +23,5 @@ func reset():
 	score = 0
 	river_speed = 5
 	distance_travelled = 0
+	game_over = false
 	

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Audio/mixkit-to-the-next-round-1047.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Scripts/Audio.gd" type="Script" id=2]
+[ext_resource path="res://Audio/SUCCESS PICKUP Collect Chime 01.ogg" type="AudioStream" id=3]
+
+[node name="Audio" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Music"
+
+[node name="SFXMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -61.0
+margin_top = -20.0
+margin_right = 225.0
+margin_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="GridContainer"]
+margin_right = 91.0
+margin_bottom = 14.0
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="GridContainer"]
+margin_top = 18.0
+margin_right = 91.0
+margin_bottom = 34.0
+value = 50.0
+
+[node name="MusicVolume" type="Label" parent="GridContainer"]
+margin_top = 38.0
+margin_right = 91.0
+margin_bottom = 52.0
+text = "0"
+
+[node name="SFXVolumeLabel" type="Label" parent="GridContainer"]
+margin_top = 56.0
+margin_right = 91.0
+margin_bottom = 70.0
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="GridContainer"]
+margin_top = 74.0
+margin_right = 91.0
+margin_bottom = 90.0
+
+[node name="SFXVolume" type="Label" parent="GridContainer"]
+margin_top = 94.0
+margin_right = 91.0
+margin_bottom = 108.0
+text = "0"
+
+[connection signal="focus_entered" from="GridContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_focus_entered"]
+[connection signal="focus_exited" from="GridContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_focus_exited"]
+[connection signal="value_changed" from="GridContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="focus_entered" from="GridContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_focus_entered"]
+[connection signal="focus_exited" from="GridContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_focus_exited"]
+[connection signal="value_changed" from="GridContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]

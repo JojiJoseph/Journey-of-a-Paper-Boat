@@ -26,3 +26,7 @@ func _on_ExitButton_pressed():
 
 func _on_HelpButton_pressed():
 	get_tree().change_scene("res://Scenes/Help.tscn")
+
+
+func _on_SettingsButton_pressed():
+	get_tree().change_scene("res://Scenes/Settings.tscn")

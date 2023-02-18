@@ -16,13 +16,5 @@ func _ready():
 #	pass
 
 
-func _on_StartButton_pressed():
-	get_tree().change_scene("res://Scenes/Main.tscn")
-
-
-func _on_ExitButton_pressed():
-	get_tree().quit()
-
-
-func _on_HelpButton_pressed():
-	get_tree().change_scene("res://Scenes/Help.tscn")
+func _on_BackButton_pressed():
+	get_tree().change_scene("res://Scenes/Menu.tscn")

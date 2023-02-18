@@ -1,9 +1,12 @@
-extends Control
+extends Node
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+var score = 0
+var distance_travelled = 0
+var river_speed = 5 # m/s
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,14 +18,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_StartButton_pressed():
-	get_tree().change_scene("res://Scenes/Main.tscn")
-
-
-func _on_ExitButton_pressed():
-	get_tree().quit()
-
-
-func _on_HelpButton_pressed():
-	get_tree().change_scene("res://Scenes/Help.tscn")
+func reset():
+	score = 0
+	river_speed = 5
+	distance_travelled = 0
+	

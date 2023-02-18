@@ -20,9 +20,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("left"):
-		translate(Vector3(0,0,-0.01))
+		if global_transform.origin.z-0.1 >= -10:
+			translate(Vector3(0,0,-0.1))
 	if Input.is_action_pressed("right"):
-		translate(Vector3(0,0,+0.01))
+		if global_transform.origin.z+0.1 <= 10:
+			translate(Vector3(0,0,+0.1))
+	var camera = get_parent().get_node("Camera")
+	camera.global_transform.origin.z = 20
+	camera.global_transform.origin.y = 4 +  global_transform.origin.z/20
+	camera.look_at(global_transform.origin, Vector3(0,1.0,0))
+		
 
 
 func _on_Area_body_entered(body):

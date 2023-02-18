@@ -28,12 +28,15 @@ func _process(delta):
 		for world_block in world_blocks:
 			world_block.global_transform.origin -= delta*Vector3(5,0,0) # 5 m/s
 			
-		if world_blocks[0].global_transform.origin.x < -100:
+		if world_blocks[len(world_blocks)-1].global_transform.origin.x < 400:
+			
 			var new_world_block = WorldBlock.instance()
 			$MovingBlocks.add_child(new_world_block)
-			new_world_block.global_transform.origin.x = 0
-			new_world_block.global_transform.origin.z = -100
-			world_blocks[0].queue_free()
+			new_world_block.global_transform.origin.x = world_blocks[len(world_blocks)-1].global_transform.origin.x + 400
+			new_world_block.global_transform.origin.y = world_blocks[len(world_blocks)-1].global_transform.origin.y
+			new_world_block.global_transform.origin.z = world_blocks[len(world_blocks)-1].global_transform.origin.z
+			if len(world_blocks) > 4:
+				world_blocks[0].queue_free()
 		var last_x = -1000
 		for child in $Coins.get_children():
 			child.global_transform.origin -= delta * Vector3(5, 0, 0)

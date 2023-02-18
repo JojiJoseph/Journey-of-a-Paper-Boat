@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 
 Global="*res://Scripts/global.gd"
 
+[display]
+
+window/size/height=768
+
 [input]
 
 left={

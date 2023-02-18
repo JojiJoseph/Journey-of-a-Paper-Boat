@@ -1,5 +1,5 @@
  - [] Shaders
-    - [ ] Sea shader
+    - [x] Sea shader
     - [ ] Rain shader
     - [ ] 
  - [ ] Objects
@@ -9,8 +9,9 @@
         - [x] Coin sound
     - [ ] 
     - [ ] Replace placeholder objects with polished objects
-     - [ ] Coins
-     - [ ] Paperboat
+     - [x] Coins
+     - [x] Paperboat
+     - [ ] Otherboats
 
  - [ ] Music and Sound
  - [ ] UI

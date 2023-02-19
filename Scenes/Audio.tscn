@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Audio/mixkit-to-the-next-round-1047.mp3" type="AudioStream" id=1]
+[ext_resource path="res://mixkit-the-journey-79.mp3" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Audio.gd" type="Script" id=2]
 [ext_resource path="res://Audio/SUCCESS PICKUP Collect Chime 01.ogg" type="AudioStream" id=3]
+[ext_resource path="res://settings_theme.tres" type="Theme" id=4]
 
 [node name="Audio" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 4 )
 script = ExtResource( 2 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
@@ -22,45 +24,49 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -61.0
-margin_top = -20.0
-margin_right = 225.0
-margin_bottom = 153.0
+margin_left = -143.0
+margin_top = -86.0
+margin_right = 306.0
+margin_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
+columns = 3
 
 [node name="MusicVolumeLabel" type="Label" parent="GridContainer"]
-margin_right = 91.0
-margin_bottom = 14.0
+margin_right = 165.0
+margin_bottom = 22.0
 text = "Music Volume"
 
 [node name="MusicVolumeSlider" type="HSlider" parent="GridContainer"]
-margin_top = 18.0
-margin_right = 91.0
-margin_bottom = 34.0
+margin_left = 169.0
+margin_right = 432.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
 value = 50.0
 
 [node name="MusicVolume" type="Label" parent="GridContainer"]
-margin_top = 38.0
-margin_right = 91.0
-margin_bottom = 52.0
+margin_left = 436.0
+margin_right = 449.0
+margin_bottom = 22.0
 text = "0"
 
 [node name="SFXVolumeLabel" type="Label" parent="GridContainer"]
-margin_top = 56.0
-margin_right = 91.0
-margin_bottom = 70.0
+margin_top = 26.0
+margin_right = 165.0
+margin_bottom = 48.0
 text = "SFX Volume"
 
 [node name="SFXVolumeSlider" type="HSlider" parent="GridContainer"]
-margin_top = 74.0
-margin_right = 91.0
-margin_bottom = 90.0
+margin_left = 169.0
+margin_top = 26.0
+margin_right = 432.0
+margin_bottom = 42.0
 
 [node name="SFXVolume" type="Label" parent="GridContainer"]
-margin_top = 94.0
-margin_right = 91.0
-margin_bottom = 108.0
+margin_left = 436.0
+margin_top = 26.0
+margin_right = 449.0
+margin_bottom = 48.0
 text = "0"
 
 [connection signal="focus_entered" from="GridContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_focus_entered"]

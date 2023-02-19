@@ -1,17 +1,31 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=1]
+[ext_resource path="res://BackgroundAnimation.tscn" type="PackedScene" id=2]
+[ext_resource path="res://theme.tres" type="Theme" id=3]
+[ext_resource path="res://journey/journey.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 75
+font_data = ExtResource( 5 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
+[node name="ViewportContainer" parent="." instance=ExtResource( 2 )]
+
 [node name="Label" type="Label" parent="."]
-margin_left = 411.0
-margin_top = 357.0
-margin_right = 557.0
-margin_bottom = 371.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -300.0
+margin_bottom = -50.0
+theme = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0.27451, 1, 1 )
+custom_fonts/font = SubResource( 6 )
 text = "Journey of a paper boat"
 align = 1
 
@@ -22,31 +36,38 @@ margin_left = -83.0
 margin_right = -200.0
 margin_bottom = 599.0
 grow_horizontal = 0
+theme = ExtResource( 3 )
 alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_top = 253.0
-margin_right = 63.0
+margin_top = 229.0
+margin_right = 202.0
 margin_bottom = 273.0
 text = "Start"
+align = 0
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 margin_top = 277.0
-margin_right = 63.0
-margin_bottom = 297.0
+margin_right = 202.0
+margin_bottom = 321.0
+theme = ExtResource( 3 )
 text = "Settings"
+align = 0
 
 [node name="HelpButton" type="Button" parent="VBoxContainer"]
+visible = false
 margin_top = 301.0
-margin_right = 63.0
-margin_bottom = 321.0
-text = "Help"
+margin_right = 202.0
+margin_bottom = 345.0
+text = "Credits"
+align = 0
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
 margin_top = 325.0
-margin_right = 63.0
-margin_bottom = 345.0
+margin_right = 202.0
+margin_bottom = 369.0
 text = "Exit"
+align = 0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://water_texture.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/PaperBoat.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ProceduralSky" id=3]
+radiance_size = 0
+sky_top_color = Color( 1, 1, 1, 1 )
+sky_horizon_color = Color( 0.0509804, 0.592157, 0.737255, 1 )
+ground_bottom_color = Color( 0.333333, 0.776471, 0.878431, 1 )
+ground_horizon_color = Color( 0.054902, 0.760784, 0.984314, 1 )
+
+[sub_resource type="Environment" id=4]
+background_mode = 2
+background_sky = SubResource( 3 )
+background_sky_custom_fov = 17.0
+ambient_light_color = Color( 1, 0.862745, 0.862745, 1 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type spatial;
+render_mode unshaded, cull_disabled;
+
+uniform sampler2D texturemap: hint_albedo;
+
+void vertex() {
+	VERTEX.y = VERTEX.y +  0.5*sin(VERTEX.x+TIME*1.2) + 0.5*sin(VERTEX.z+TIME*3.2);
+}
+
+void fragment() {
+	ALBEDO = texture(texturemap, UV*vec2(2.1,2.1)).rgb;
+	METALLIC = 0.8;
+	ALPHA = 0.75;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 5 )
+shader_param/texturemap = ExtResource( 2 )
+
+[sub_resource type="CubeMesh" id=1]
+material = SubResource( 2 )
+size = Vector3( 50, 5, 50 )
+subdivide_width = 200
+subdivide_height = 200
+subdivide_depth = 200
+
+[node name="ViewportContainer" type="ViewportContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="PaperBoat" parent="Spatial" instance=ExtResource( 3 )]
+transform = Transform( 1.33114, 0, 1.49267, 0, 2, 0, -1.49267, 0, 1.33114, -12.0874, 0.325412, 8.42638 )
+in_title = true
+
+[node name="Camera" type="Camera" parent="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.979614, 0.20089, 0, -0.20089, 0.979614, -6.12861, 3.07052, 27.1924 )
+environment = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, -8.29934, -3.01375, 0.813694 )
+mesh = SubResource( 1 )
+material/0 = null

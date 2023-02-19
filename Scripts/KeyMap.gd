@@ -30,8 +30,7 @@ func _ready():
 				action_button.text = "..."
 			$VBoxContainer/GridContainer.add_child(action_button)
 			action_button.connect("pressed",self,"action_button_pressed", [action_button, action, evt])
-	$VBoxContainer/HBoxContainer/OptionButton.add_item("Relative to character")
-	$VBoxContainer/HBoxContainer/OptionButton.add_item("Relative to observer")
+	
 	#if Global.relative_to_observer:
 		#$VBoxContainer/HBoxContainer/OptionButton.selected = 1
 

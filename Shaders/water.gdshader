@@ -9,6 +9,6 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = texture(texturemap, UV*vec2(2.1,2.1)).rgb;
-	METALLIC = 0.1;
+	METALLIC = 0.8;
 	ALPHA = 0.75;
 }

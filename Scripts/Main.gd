@@ -15,7 +15,7 @@ var PowerUp = preload("res://Scenes/PowerUp.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,9 +27,9 @@ func _process(delta):
 		var world_blocks = $MovingBlocks.get_children()
 		for world_block in world_blocks:
 			world_block.global_transform.origin -= delta*Vector3(Global.boat_speed,0,0)
-			Global.boat_speed += delta * 0.4
-			Global.boat_speed = min(250, Global.boat_speed)
-			
+			Global.boat_speed += delta * 0.1
+			Global.boat_speed = min(50, Global.boat_speed)
+			print(Global.boat_speed)
 		if world_blocks[len(world_blocks)-1].global_transform.origin.x < 400:
 			
 			var new_world_block = WorldBlock.instance()
@@ -42,7 +42,7 @@ func _process(delta):
 		var last_x = -1000
 		var first_x = 1000
 		for child in $Coins.get_children():
-			child.global_transform.origin -= delta * Vector3(5, 0, 0)
+			child.global_transform.origin -= delta * Vector3(Global.boat_speed, 0, 0)
 			if Global.magnet_mode:
 				var diff = $Player.global_transform.origin - child.global_transform.origin
 				if diff.length() < 20:
@@ -52,14 +52,14 @@ func _process(delta):
 		if last_x < 100:
 			var new_coin = Coin.instance()
 			$Coins.add_child(new_coin)
-			new_coin.global_transform.origin = Vector3(last_x + rand_range(10,20), 0.5, rand_range(0, 10))
+			new_coin.global_transform.origin = Vector3(last_x + rand_range(10,20), 0.5, rand_range(-10, 10))
 			if first_x < -100:
 				$Coins.get_child(0).queue_free()
 		var power_ups = $PowerUps.get_children()
 		last_x = -1000
 		first_x = 1000
 		for child in power_ups:
-			child.global_transform.origin -= delta * Vector3(3, 0, 0)
+			child.global_transform.origin -= delta * Vector3(Global.boat_speed, 0, 0)
 			#print(child.global_transform.origin.x)
 			last_x = max(last_x, child.global_transform.origin.x)
 			first_x = min(first_x, child.global_transform.origin.x)
@@ -80,15 +80,16 @@ func _process(delta):
 			$Boats.add_child(new_boat)
 			new_boat.global_transform.origin.x = 20
 		else:
-			if boats[0].global_transform.origin.x < -90:
+			if boats[len(boats)-1].global_transform.origin.x < 200:
 				var new_boat = Boat.instance()
 				$Boats.add_child(new_boat)
 				new_boat.global_transform.origin.x = boats[len(boats)-1].global_transform.origin.x + rand_range(50,60)
+				new_boat.global_transform.origin.y = $Player.global_transform.origin.y
 				new_boat.global_transform.origin.z = rand_range(-10,10)
 			if boats[0].global_transform.origin.x < -100:
 				boats[0].queue_free()
 		for boat in boats:
-			boat.global_transform.origin -= delta * Vector3(rand_range(2,4), 0, 0)
+			boat.global_transform.origin -= delta * Vector3(-rand_range(10,10)+ Global.boat_speed, 0, 0)
 			
 		
 		return

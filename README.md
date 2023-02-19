@@ -32,3 +32,6 @@ The journey - mixkit - by Ahjay Stelino
 OGG Casual SoundFX by Tim Beek
 
 http://www.gameburp.com/free-game-sound-fx/
+
+### Font
+https://www.dafont.com/journey.font

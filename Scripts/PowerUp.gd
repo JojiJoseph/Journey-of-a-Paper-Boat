@@ -1,13 +1,12 @@
 extends Spatial
 
 enum {
-	EXTRA_POINTS,
-	KILL_ALL,
-	INVINCIBLE,
-	
+	SPEED_UP,
+	MAGNET,
+	SLOW_DOWN
 }
 
-export(int) var power = EXTRA_POINTS
+export(int) var power = SPEED_UP
 
 #var powerup_sprites = [
 #	preload("res://art/power_ups/power_up_double.svg"),
@@ -24,11 +23,24 @@ func _ready():
 	#	queue_free()
 	#	return
 	#$Sprite.texture = powerup_sprites[power]
-	pass
+	$Magnet.hide()
+	$Rabbit.hide()
+	$Turtle.hide()
+	
 	
 	
 func _process(_delta):
-	pass
+	#for child in $Meshes.get_children():
+	#	child.hide()
+	if power == MAGNET:
+		$Magnet.show()
+		$AnimationPlayer.play("rotate_magnet")
+	if power == SPEED_UP:
+		$Rabbit.show()
+		$AnimationPlayer.play("rotate_rabbit")
+	if power == SLOW_DOWN:
+		$Turtle.show()
+		$AnimationPlayer.play("rotate_turtle")
 	#if Engine.editor_hint:
 	#	$Sprite.texture = powerup_sprites[power]
 	#if not Engine.editor_hint:

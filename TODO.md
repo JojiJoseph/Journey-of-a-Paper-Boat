@@ -3,7 +3,7 @@
     - [ ] Rain shader
     - [ ] 
  - [ ] Objects
-    - [ ] Paperboat
+    - [x] Paperboat
     - [x] Coins
         - [x] Update score
         - [x] Coin sound
@@ -14,6 +14,7 @@
      - [ ] Otherboats
 
  - [ ] Music and Sound
+ - [x] Game Over
  - [ ] UI
     - [ ] Paperboat background
     - [x] Settings window
@@ -21,10 +22,10 @@
   - [ ]
  - [ ] Coins
  - [ ] Powerups
-    - [ ] Slow
-    - [ ] Fast
+    - [x] Slow
+    - [x] Fast
     - [ ] Invicible
-    - [ ] Coin magent
+    - [x] Coin magent
  - [ ] HUD
   - [x] Score
   - [ ] Distance Travelled
@@ -38,8 +39,3 @@
   - [ ] Lighting
   - [ ] A confirmation box for exit
 
-
-Remember
---------
-
-2nd collision layer is for coin

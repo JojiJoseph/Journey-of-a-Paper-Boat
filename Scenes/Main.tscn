@@ -254,10 +254,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -5, -100 )
 
 [node name="Crocs" type="Node" parent="."]
 
-[node name="PowerUps" type="Node" parent="."]
+[node name="PowerUps" type="Spatial" parent="."]
 
 [node name="PowerUp" parent="PowerUps" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.42217, 0, 0 )
 
 [node name="GreenField" type="StaticBody" parent="."]
 

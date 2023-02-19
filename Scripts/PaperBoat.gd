@@ -41,11 +41,21 @@ func _on_Area_body_entered(body):
 
 
 func _on_EnemyHitbox_body_entered(body):
+	$Sounds/GameOver.pause_mode = Node.PAUSE_MODE_PROCESS
+	$Sounds/GameOver.play()
 	Global.game_over = true
 
 
 func _on_PowerUpHitbox_body_entered(body):
-	if body.power == body.EXTRA_POINTS:
-		Global.score += 100
+	if body.power == body.SPEED_UP:
+		Global.boat_speed += 100
 		body.queue_free()
+	if body.power == body.MAGNET:
+		Global.magnet_mode = true
+		Global.magnet_mode_elapsed = 0
+		body.queue_free()
+	if body.power == body.SLOW_DOWN:
+		Global.boat_speed -= 100
+		Global.boat_speed = max(2, Global.boat_speed)
+		body.queue_free() 
 	

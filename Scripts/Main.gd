@@ -26,7 +26,9 @@ func _process(delta):
 	else:
 		var world_blocks = $MovingBlocks.get_children()
 		for world_block in world_blocks:
-			world_block.global_transform.origin -= delta*Vector3(5,0,0) # 5 m/s
+			world_block.global_transform.origin -= delta*Vector3(Global.boat_speed,0,0)
+			Global.boat_speed += delta * 0.4
+			Global.boat_speed = min(250, Global.boat_speed)
 			
 		if world_blocks[len(world_blocks)-1].global_transform.origin.x < 400:
 			
@@ -38,15 +40,37 @@ func _process(delta):
 			if len(world_blocks) > 4:
 				world_blocks[0].queue_free()
 		var last_x = -1000
+		var first_x = 1000
 		for child in $Coins.get_children():
 			child.global_transform.origin -= delta * Vector3(5, 0, 0)
+			if Global.magnet_mode:
+				var diff = $Player.global_transform.origin - child.global_transform.origin
+				if diff.length() < 20:
+					child.global_transform.origin += 10 * delta * diff
 			last_x = max(last_x, child.global_transform.origin.x)
-		if last_x < 0:
+			first_x = min(first_x, child.global_transform.origin.x)
+		if last_x < 100:
 			var new_coin = Coin.instance()
 			$Coins.add_child(new_coin)
-			new_coin.global_transform.origin = Vector3(1.2,rand_range(0,2), rand_range(0, 2))
-			if len($Coins.get_children()) != 0:
+			new_coin.global_transform.origin = Vector3(last_x + rand_range(10,20), 0.5, rand_range(0, 10))
+			if first_x < -100:
 				$Coins.get_child(0).queue_free()
+		var power_ups = $PowerUps.get_children()
+		last_x = -1000
+		first_x = 1000
+		for child in power_ups:
+			child.global_transform.origin -= delta * Vector3(3, 0, 0)
+			#print(child.global_transform.origin.x)
+			last_x = max(last_x, child.global_transform.origin.x)
+			first_x = min(first_x, child.global_transform.origin.x)
+		if last_x < 200:
+			var new_power_up = PowerUp.instance()
+			$PowerUps.add_child(new_power_up)
+			
+			new_power_up.global_transform.origin = Vector3(last_x + rand_range(50,100), 0.5, rand_range(-10, 10))
+			new_power_up.power = randi()%3
+			if first_x < -100:
+				$PowerUps.get_child(0).queue_free()
 		$HUD/ScoreLabel.text = "score: " + str(Global.score)
 		
 		# Update boats
@@ -54,15 +78,21 @@ func _process(delta):
 		if len(boats) == 0:
 			var new_boat = Boat.instance()
 			$Boats.add_child(new_boat)
-			new_boat.global_transform.origin.x = 10
-		elif boats[0].global_transform.origin.x < - 10:
-			var new_boat = Boat.instance()
-			$Boats.add_child(new_boat)
-			new_boat.global_transform.origin.x = 10
-			boats[0].queue_free()
+			new_boat.global_transform.origin.x = 20
+		else:
+			if boats[0].global_transform.origin.x < -90:
+				var new_boat = Boat.instance()
+				$Boats.add_child(new_boat)
+				new_boat.global_transform.origin.x = boats[len(boats)-1].global_transform.origin.x + rand_range(50,60)
+				new_boat.global_transform.origin.z = rand_range(-10,10)
+			if boats[0].global_transform.origin.x < -100:
+				boats[0].queue_free()
 		for boat in boats:
-			boat.global_transform.origin -= delta * Vector3(2, 0, 0)
+			boat.global_transform.origin -= delta * Vector3(rand_range(2,4), 0, 0)
 			
+		
+		return
+		
 		var logs = $Logs.get_children()
 		if len(logs) == 0:
 			var new_log = Log.instance()
@@ -102,18 +132,7 @@ func _process(delta):
 		for fish in fishes:
 			fish.global_transform.origin -= delta * Vector3(rand_range(-10,10), 0, 0)
 			
-		var power_ups = $PowerUps.get_children()
-		if len(power_ups) == 0:
-			var new_power_up = PowerUp.instance()
-			$PowerUps.add_child(new_power_up)
-			new_power_up.global_transform.origin.x = 10
-		elif power_ups[0].global_transform.origin.x < - 10:
-			var new_power_up = PowerUp.instance()
-			$PowerUps.add_child(new_power_up)
-			new_power_up.global_transform.origin.x = 30
-			power_ups[0].queue_free()
-		for power_up in power_ups:
-			power_up.global_transform.origin -= delta * Vector3(5, 0, 0)
+		
 
 
 func _on_RestartButoon_pressed():

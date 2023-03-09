@@ -1,7 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://water_texture.jpg" type="Texture" id=2]
 [ext_resource path="res://Scenes/PaperBoat.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+
+
+void fragment() {
+	COLOR = vec4(0,1.0,0,0.5);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
 
 [sub_resource type="ProceduralSky" id=3]
 radiance_size = 0
@@ -45,6 +57,7 @@ subdivide_height = 200
 subdivide_depth = 200
 
 [node name="ViewportContainer" type="ViewportContainer"]
+material = SubResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 40.0
